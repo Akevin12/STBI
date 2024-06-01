@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            margin: 20px;
+            background-color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .result-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-card h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            color: #ddd;
+        }
+
+        .result-card a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .result-card a:hover {
+            color: #0056b3;
+        }
+
+        .no-results-message {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>Search Results</h1>
+        <a class="back-button" onclick="goBack()">Back</a>
+    </div>
+
+    {% if search_results %}
+        {% for result in search_results %}
+        <div class="result-card">
+            <h2>{{ result['filename'] }}</h2>
+            <p>{{ result['document'] }}</p>
+            <p>Similarity: {{ result['similarity'] }}</p>
+            <a href="#" onclick="showMoreInfo('{{ filename }}'); return false;">More Info</a>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-results-message">No results found for your search.</p>
+    {% endif %}
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+
+    function showMoreInfo(filename) {
+        // Replace this with your logic to show more information
+        alert('Display more information for: ' + filename);
+    }
+</script>
+</body>
+
+</html>
